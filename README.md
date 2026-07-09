@@ -236,3 +236,45 @@ Example: `ros2 launch mtc_tutorial bringup.launch.py servo_grasp_z:=0.05`.
   action; the arm is commanded on `/arm_group_controller/joint_trajectory`.
 - Perception's overhead camera also publishes the static `world → top_sim_camera`
   TF used for ray-plane unprojection (in `perception.launch.py`).
+
+
+## Roadmap & Progress
+
+### Phase 1: Foundation & Setup (Current)
+- [x] Hardware procurement: HiWonder LeRobot SO-ARM101
+- [x] ROS2 Jazzy environment setup (Ubuntu 24.04)
+- [ ] **Real-world training dataset collection** (using HiWonder SO-ARM101)
+  - Cup detection in real lighting conditions
+  - Gripper calibration & grasp patterns
+  - Water dispenser interaction profiles
+- [ ] YOLO model training on real-world data
+- [ ] Arm kinematics validation on physical hardware
+
+### Phase 2: Integration & Testing
+- [ ] MoveIt2 trajectory planning validation
+- [ ] Perception pipeline integration (YOLO + AprilTag)
+- [ ] Sim-to-real transfer validation
+- [ ] Integration testing with AMR (JetRacer)
+- [ ] End-to-end cup delivery workflow testing
+
+### Phase 3: Optimization & Deployment
+- [ ] Performance tuning & latency optimization
+- [ ] Robustness testing (various cup types, lighting conditions)
+- [ ] Error handling & recovery mechanisms
+- [ ] Deployment to production environment
+
+### Real-World Training Infrastructure
+| Component | Status | Details |
+|-----------|--------|---------|
+| **Physical Robot** | ✅ Deployed | HiWonder LeRobot SO-ARM101 |
+| **Training Dataset** | 🔄 In Progress | Real-world images & trajectories |
+| **Simulation (Isaac Sim)** | ⏳ Pending | Parallel sim training |
+| **Real-world Validation** | 🔄 In Progress | Testing on physical hardware |
+
+### Next Steps
+
+- [ ] Configure arm parameters using real-world calibration
+- [ ] Collect 500+ training images (cup detection in target environment)
+- [ ] Train YOLO model on HiWonder hardware data
+- [ ] Validate motion planning on physical SO-ARM101
+- [ ] Begin integration testing with JetRacer AMR
