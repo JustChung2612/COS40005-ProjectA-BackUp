@@ -1,4 +1,4 @@
-<h1 style="color:red;">Robot Arm 🦾 🦾 🦾</h1>
+# 🔴 Robot Arm 🦾 🦾 🦾
 
 ## High-Level Objectives:
 
