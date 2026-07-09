@@ -10,7 +10,6 @@
 ## Technical Stack
 
 ### Overview
-
 The JetRacer is an **Autonomous Mobile Robot (AMR)** running on a **Jetson Nano** device. Its primary responsibility is to navigate from a pickup station to delivery destinations, avoiding obstacles using onboard sensing.
 
 ### Technology Stack
@@ -22,7 +21,7 @@ The JetRacer is an **Autonomous Mobile Robot (AMR)** running on a **Jetson Nano*
 | **Sensors** | LiDAR, Wheel Encoders, Camera | Navigation, localization, obstacle detection |
 | **Drive Interface** | Ackermann Control | Converts command velocity to Ackermann drive commands |
 | **Compute** | Jetson Nano (Legacy) | 4GB RAM edge AI processing |
-| **Development OS** | Ubuntu 24.04 + ROS 2 Jazzy | Native development environment |
+| **Development OS** | Ubuntu 24.04 + ROS 2 Humble | Native development environment |
 | **Build System** | colcon, rosdep | Build and dependency management |
 
 ### Package Breakdown
@@ -31,13 +30,11 @@ The JetRacer is an **Autonomous Mobile Robot (AMR)** running on a **Jetson Nano*
 - **Drive interface** for Ackermann steering
 - Converts Nav2's `/cmd_vel` (geometry_msgs/Twist) → `/ackermann_cmd` (AckermannDrive)
 - Enables steering control on JetRacer platform
-
 #### 2. navigation/slam_custom
 - **SLAM bring-up** configuration
 - Launches `slam_toolbox` (online-async mode)
 - Includes preconfigured `slam_custom.rviz` for visualization
 - Real-time mapping and localization
-
 ### 3. navigation/carter_navigation
 - **Nav2 configuration** (adapted from Isaac's Carter sample)
 - Maps configuration files (*_navigation.yaml)
@@ -82,19 +79,20 @@ The JetRacer is an **Autonomous Mobile Robot (AMR)** running on a **Jetson Nano*
 ### Development & Testing
 | Aspect | Details |
 |--------|---------|
-| **Simulator** | Isaac Sim with ROS 2 Bridge (Jazzy) |
-| **Target OS** | Ubuntu 24.04 |
-| **ROS Distribution** | ROS 2 Jazzy |
+| **Simulator** | Isaac Sim with ROS 2 Bridge (Humble) |
+| **Target OS** | Ubuntu 18 |
+| **ROS Distribution** | ROS 2 Humble |
 | **Build Tools** | colcon, rosdep |
 | **Deployment** | Native (Ubuntu 24.04) on Jetson Nano |
 
+### Dependencies
 
-## Dependencies
-
-- ROS 2 Jazzy
+- ROS 2 Humble
 - Nav2 (navigation stack)
 - slam_toolbox (SLAM backend)
 - OpenCV (vision processing)
 - Geometry msgs (ROS2)
 - Ackermann steering messages
 - colcon (build system)
+
+
