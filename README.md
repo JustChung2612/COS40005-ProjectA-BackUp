@@ -1,4 +1,4 @@
-# <font color="red">Robot Arm 🦾 🦾 🦾</font>
+<h1 style="color:red;">Robot Arm 🦾 🦾 🦾</h1>
 
 ## High-Level Objectives:
 
