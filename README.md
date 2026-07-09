@@ -1,5 +1,7 @@
 # Robot Arm 🦾 🦾 🦾 :
 
+<h1 style="color:red"> Robot Arm 🦾 🦾 🦾 </h1>
+
 ## High-Level Objectives:
 
 - Autonomously pick up an empty cup from the designated location
