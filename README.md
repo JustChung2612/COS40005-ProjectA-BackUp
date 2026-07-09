@@ -1,6 +1,6 @@
 # 🔴 Robot Arm Training Material 🦾 🦾 🦾
 
-## High-Level Objectives:
+## 🤖 High-Level Objectives:
 
 - Autonomously pick up an empty cup from the designated location
 - Transport the cup to the water dispenser
@@ -10,7 +10,7 @@
 - Measure and calculate the weight of the water-filled cup
 - Place the cup onto the tray for transport
 
-## Technical Stack
+## 🤖 Technical Stack
 
 ### Overview
 The Robot Arm is a **5-DOF SO-ARM 101** with a **1-DOF gripper** designed to grasp cups, move them to a water dispenser, fill them, and place them on a tray for the AMR (JetRacer) to transport.
@@ -81,7 +81,7 @@ The Robot Arm is a **5-DOF SO-ARM 101** with a **1-DOF gripper** designed to gra
 | **RAM** | 4GB (Jetson Nano Legacy) | Sufficient for ROS2 + perception |
 
 
-## Setup steps
+## 🤖 Setup steps
 ### 1. Prerequisites
 
 | Component | Version / notes |
@@ -238,7 +238,7 @@ Example: `ros2 launch mtc_tutorial bringup.launch.py servo_grasp_z:=0.05`.
   TF used for ray-plane unprojection (in `perception.launch.py`).
 
 
-## Roadmap & Progress
+## 🤖 Roadmap & Progress
 
 ### Phase 1: Foundation & Setup (Current)
 - [x] Hardware procurement: HiWonder LeRobot SO-ARM101
