@@ -1,4 +1,4 @@
-# 🔴 Robot Arm 🦾 🦾 🦾
+# 🔴 Robot Arm Training Material 🦾 🦾 🦾
 
 ## High-Level Objectives:
 
