@@ -1,19 +1,18 @@
 # 🔴 Jetracer Training Material 🦾 🦾 🦾
 
-## High-Level Objectives:
+## 🤖 High-Level Objectives:
 
 - Accurately identify and locate the position of the person who sent the signal
 - Autonomously navigate and transport the tray containing the water-filled cup from Position B (water dispenser location) to Position A (person's location)
 - Detect and avoid obstacles (such as furniture and other objects) during navigation
 - Successfully deliver the tray to the person without spilling the water
 
-## Technical Stack
+## 🤖 Technical Stack
 
 ### Overview
 The JetRacer is an **Autonomous Mobile Robot (AMR)** running on a **Jetson Nano** device. Its primary responsibility is to navigate from a pickup station to delivery destinations, avoiding obstacles using onboard sensing.
 
 ### Technology Stack
-
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
 | **Navigation & SLAM** | ROS2 + SLAM + Nav2 | Navigation, localization/SLAM, obstacle avoidance |
@@ -25,7 +24,6 @@ The JetRacer is an **Autonomous Mobile Robot (AMR)** running on a **Jetson Nano*
 | **Build System** | colcon, rosdep | Build and dependency management |
 
 ### Package Breakdown
-
 #### 1. ackermann_control (cmdvel_to_ackermann)
 - **Drive interface** for Ackermann steering
 - Converts Nav2's `/cmd_vel` (geometry_msgs/Twist) → `/ackermann_cmd` (AckermannDrive)
@@ -66,7 +64,6 @@ The JetRacer is an **Autonomous Mobile Robot (AMR)** running on a **Jetson Nano*
 | **Camera** | Visual navigation | Real-time environment context |
 
 ### Core Technologies
-
 #### ROS2 + Nav2 Stack
 - **SLAM (Simultaneous Localization and Mapping):** Building maps while tracking position
 - **Localization:** Determining robot position within known map
@@ -91,9 +88,8 @@ The JetRacer is an **Autonomous Mobile Robot (AMR)** running on a **Jetson Nano*
 - Ackermann steering messages
 - colcon (build system)
 
-## Setup steps
-
-JetRacer — Getting Started
+## 🤖 Setup steps
+# JetRacer — Getting Started
  
 The physical robot stack. Runs **on the JetRacer** (Waveshare JetRacer, ROS 2
 Humble): base driver, RPLidar, EKF odometry, Nav2 navigation, and AprilTag
@@ -182,7 +178,48 @@ See `CALIBRATION.md` — docking accuracy depends on the camera TF + calibration
  
 ---
  
-## 4. Overriding defaults
+## 4. Robot Web Bridge (ordering app)
+ 
+The application layer — a FastAPI + HTMX mobile web UI + HTTP API for commanding
+the robot (the QR-code "Get Water" / "Refill" ordering flow). It lives in a
+separate workspace, **`orchestrator_ws/`**, and talks to this stack over the ROS
+graph: it publishes `/dock_robot`, `/abort_docking`, `/cmd_vel`, `/initialpose`
+and subscribes `/docking_state` + `/chassis/odom`. So the robot stack from §3
+(hardware + Nav2 + docking) must already be running, on the **same
+`ROS_DOMAIN_ID`**.
+ 
+### Start it
+ 
+```bash
+cd ../orchestrator_ws
+./run_web_bridge.sh          # serves on http://<host>:8088
+```
+ 
+The script sources `network.env` + ROS, then runs `ros2 run robot_web_bridge
+server`. It expects to run inside the Humble container (or a ROS-sourced shell).
+Override the port with `ROBOT_WEB_BRIDGE_PORT=9000`, and set the operator PIN via
+`ROBOT_WEB_BRIDGE_ADMIN_PIN` for the admin routes.
+ 
+### Expose it for phones (QR codes)
+ 
+In another shell, tunnel the port to a public URL so phones can scan and order:
+ 
+```bash
+./run_tunnel.sh              # prints an https://<...>.trycloudflare.com URL
+```
+ 
+### Without the robot (dev / demo)
+ 
+```bash
+./run_web_bridge_sim.sh      # SimBackend: no ROS, each leg completes on a timer
+```
+ 
+Verify the mode at runtime: `GET /api/state` → `{"mode": "robot" | "simulation"}`.
+Health check: `GET /healthz`.
+ 
+---
+ 
+## 5. Overriding defaults
  
 Extra args pass straight through to the launch files:
  
@@ -203,6 +240,5 @@ Defaults: base port `/dev/ttyACM0`, lidar port `/dev/ttyACM1`.
   calibration. Restart the driver and hold it still.
 - **Wrong serial port** → override with `base_port:=` / `lidar_port:=`.
 - **Nav2 won't move / no path** → check `/scan` and TF are live
-  (`ros2 topic hz /scan`), and that AMCL is localized on the right map.
-
-
+  (`ros2 topic hz /scan`), and that AMCL is localized on the right map
+ 
