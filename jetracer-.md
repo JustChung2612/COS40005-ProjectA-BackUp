@@ -242,3 +242,13 @@ Defaults: base port `/dev/ttyACM0`, lidar port `/dev/ttyACM1`.
 - **Nav2 won't move / no path** → check `/scan` and TF are live
   (`ros2 topic hz /scan`), and that AMCL is localized on the right map
  
+
+## 🤖 Roadmap & Progress
+
+| Phase | Focus | Status | Highlights |
+|---|---|---|---|
+| P0 | Isaac Sim scene + ROS 2 bridge | Complete | Carter/JetRacer in Isaac; `/chassis/odom`, lidar, `/cmd_vel` contract; compressed-image decode |
+| P1 | SLAM mapping | Complete | `slam_custom` = `slam_toolbox` online-async + RViz; saved maps (`test_map_*`, `my_map_*`) |
+| P2 | Nav2 localization + goal nav | Completed | AMCL + Nav2 via `carter_navigation`; `set_goal.py` sends `NavigateToPose` + `/initialpose` |
+| P3 | Drive interface + fulfillment loop | Partial | `cmd_vel` → Ackermann built; orchestrator `/dock_robot` protocol not yet consumed by the AMR |
+| P4 | Sim-to-real / on-device firmware | Planned | No JetRacer firmware in repo; workstation drives sim only |
